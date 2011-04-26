@@ -24,7 +24,7 @@ BuildRequires: libxml2-devel
 BuildRequires: qt4-devel
 BuildRequires: vlc-devel >= 1.1.1
 
-%global phonon_ver %(pkg-config --modversion phonon 2>/dev/null || echo 4.4.3)
+%global phonon_ver %(pkg-config --modversion phonon 2>/dev/null || echo 4.5.0)
 %global vlc_ver %(pkg-config --modversion libvlc 2>/dev/null || echo 1.1.0)
 
 Provides: phonon-backend%{?_isa} = %{phonon_ver}
