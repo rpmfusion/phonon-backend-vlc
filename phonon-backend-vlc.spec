@@ -1,17 +1,17 @@
 
 name: phonon-backend-vlc
 Summary: VLC phonon backend
-Version: 0.4.0
+Version: 0.4.1
 Release: 1%{?dist}
 Group: Applications/Multimedia
 License: LGPLv2+
 URL:     http://phonon.kde.org/
 %if 0%{?snap}
 # git clone git://gitorious.org/phonon/phonon-vlc.git
-# git archive --prefix=phonon-backend-vlc-%{version}/ master | bzip2 > phonon-vlc-%{version}-%{snap}.tar.bz2
-Source0: phonon-vlc-%{version}-%{snap}.tar.bz2
+# git archive --prefix=phonon-backend-vlc-%{version}/ master | xz > phonon-vlc-%{version}-%{snap}.tar.xz
+Source0: phonon-vlc-%{version}-%{snap}.tar.xz
 %else
-Source0: ftp://ftp.kde.org/pub/kde/stable/phonon/phonon-backend-vlc/%{version}/src/phonon-backend-vlc-%{version}.tar.bz2
+Source0: ftp://ftp.kde.org/pub/kde/stable/phonon/phonon-backend-vlc/%{version}/phonon-backend-vlc-%{version}.tar.xz
 %endif
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -72,6 +72,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Aug 01 2011 Rex Dieter <rdieter@fedoraproject.org> 0.4.1-1
+- 0.4.1
+
 * Tue Apr 26 2011 Rex Dieter <rdieter@fedoraproject.org> - 0.4.0-1
 - 0.4.0
 
