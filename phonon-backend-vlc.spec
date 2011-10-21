@@ -1,13 +1,15 @@
 
+%define snap 20111021
+
 name: phonon-backend-vlc
 Summary: VLC phonon backend
-Version: 0.4.1
-Release: 2%{?dist}
+Version: 0.4.55
+Release: 0.1.%{snap}%{?dist}
 Group: Applications/Multimedia
 License: LGPLv2+
 URL:     http://phonon.kde.org/
 %if 0%{?snap}
-# git clone git://gitorious.org/phonon/phonon-vlc.git
+# git clone git://anongit.kde.org/phonon-vlc
 # git archive --prefix=phonon-backend-vlc-%{version}/ master | xz > phonon-vlc-%{version}-%{snap}.tar.xz
 Source0: phonon-vlc-%{version}-%{snap}.tar.xz
 %else
@@ -17,14 +19,14 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: automoc4 >= 0.9.86
 BuildRequires: cmake >= 2.6.0
-BuildRequires: phonon-devel >= 4.5.0
 BuildRequires: kde-filesystem
-BuildRequires: libxcb-devel
-BuildRequires: libxml2-devel
-BuildRequires: qt4-devel
-BuildRequires: vlc-devel >= 1.1.1
+BuildRequires: pkgconfig(libvlc) >= 1.1.1
+BuildRequires: pkgconfig(phonon) >= 4.5.50
+BuildRequires: pkgconfig(QtCore) pkgconfig(QtGui)
+BuildRequires: pkgconfig(xcb) 
+BuildRequires: pkgconfig(xml-2.0) 
 
-%global phonon_ver %(pkg-config --modversion phonon 2>/dev/null || echo 4.5.0)
+%global phonon_ver %(pkg-config --modversion phonon 2>/dev/null || echo 4.5.50)
 %global vlc_ver %(pkg-config --modversion libvlc 2>/dev/null || echo 1.1.0)
 
 Provides: phonon-backend%{?_isa} = %{phonon_ver}
@@ -72,6 +74,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Oct 21 2011 Rex Dieter <rdieter@fedoraproject.org> 0.4.55-0.1.20111021
+- 20111021 snapshot
+- pkgconfig-style deps
+
 * Mon Aug 15 2011 Rex Dieter <rdieter@fedoraproject.org> 0.4.1-2
 - rebuild
 
