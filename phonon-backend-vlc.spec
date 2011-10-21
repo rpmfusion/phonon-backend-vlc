@@ -21,10 +21,10 @@ BuildRequires: automoc4 >= 0.9.86
 BuildRequires: cmake >= 2.6.0
 BuildRequires: kde-filesystem
 BuildRequires: pkgconfig(libvlc) >= 1.1.1
+BuildRequires: pkgconfig(libxml-2.0)
 BuildRequires: pkgconfig(phonon) >= 4.5.50
 BuildRequires: pkgconfig(QtCore) pkgconfig(QtGui)
 BuildRequires: pkgconfig(xcb) 
-BuildRequires: pkgconfig(xml-2.0) 
 
 %global phonon_ver %(pkg-config --modversion phonon 2>/dev/null || echo 4.5.50)
 %global vlc_ver %(pkg-config --modversion libvlc 2>/dev/null || echo 1.1.0)
