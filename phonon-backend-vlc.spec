@@ -25,6 +25,8 @@ BuildRequires: pkgconfig(libxml-2.0)
 BuildRequires: pkgconfig(phonon) >= 4.5.50
 BuildRequires: pkgconfig(QtCore) pkgconfig(QtGui)
 BuildRequires: pkgconfig(xcb) 
+# Oh, the irony of being in the default buildroot @ rpmfusion
+BuildRequires: phonon-backend-gstreamer
 
 %global phonon_ver %(pkg-config --modversion phonon 2>/dev/null || echo 4.5.50)
 %global vlc_ver %(pkg-config --modversion libvlc 2>/dev/null || echo 1.1.10)
