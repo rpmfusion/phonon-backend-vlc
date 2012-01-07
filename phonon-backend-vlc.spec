@@ -1,15 +1,17 @@
 
+%define snap 20120107
+
 name: phonon-backend-vlc
 Summary: VLC phonon backend
-Version: 0.4.1
-Release: 2%{?dist}
+Version: 0.5.0
+Release: 0.2.%{snap}git%{?dist}
 Group: Applications/Multimedia
 License: LGPLv2+
 URL:     http://phonon.kde.org/
 %if 0%{?snap}
-# git clone git://gitorious.org/phonon/phonon-vlc.git
-# git archive --prefix=phonon-backend-vlc-%{version}/ master | xz > phonon-vlc-%{version}-%{snap}.tar.xz
-Source0: phonon-vlc-%{version}-%{snap}.tar.xz
+# git clone git://anongit.kde.org/phonon-vlc; cd phonon-vlc
+# git archive --prefix=phonon-backend-vlc-%{version}/ master | xz > phonon-backend-vlc-%{version}-%{snap}.tar.xz
+Source0: phonon-backend-vlc-%{version}-%{snap}.tar.xz
 %else
 Source0: ftp://ftp.kde.org/pub/kde/stable/phonon/phonon-backend-vlc/%{version}/phonon-backend-vlc-%{version}.tar.xz
 %endif
@@ -17,21 +19,23 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: automoc4 >= 0.9.86
 BuildRequires: cmake >= 2.6.0
-BuildRequires: phonon-devel >= 4.5.0
 BuildRequires: kde-filesystem
-BuildRequires: libxcb-devel
-BuildRequires: libxml2-devel
-BuildRequires: qt4-devel
-BuildRequires: vlc-devel >= 1.1.1
+BuildRequires: pkgconfig(libvlc) >= 1.1.10
+BuildRequires: pkgconfig(libxml-2.0)
+BuildRequires: pkgconfig(phonon) >= 4.5.50
+BuildRequires: pkgconfig(QtCore) pkgconfig(QtGui)
+BuildRequires: pkgconfig(xcb) 
+# Oh, the irony of being in the default buildroot @ rpmfusion
+BuildRequires: phonon-backend-gstreamer
 
-%global phonon_ver %(pkg-config --modversion phonon 2>/dev/null || echo 4.5.0)
-%global vlc_ver %(pkg-config --modversion libvlc 2>/dev/null || echo 1.1.0)
+%global phonon_ver %(pkg-config --modversion phonon 2>/dev/null || echo 4.5.50)
+%global vlc_ver %(pkg-config --modversion libvlc 2>/dev/null || echo 1.1.10)
 
 Provides: phonon-backend%{?_isa} = %{phonon_ver}
 
 Requires: vlc-core%{?_isa} >= %{vlc_ver} 
 Requires: phonon%{?_isa} >= %{phonon_ver}
-Requires: qt4%{?_isa} >= %{_qt4_version}
+%{?_qt4:Requires: qt4%{?_isa} >= %{_qt4_version}}
 
 
 %description
@@ -72,6 +76,16 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sat Jan 07 2012 Rex Dieter <rdieter@fedoraproject.org> 0.5.0-0.2.20120107git
+- 20120107 (master branch) snapshot
+
+* Mon Dec 12 2011 Rex Dieter <rdieter@fedoraproject.org> 0.5.0-0.1.20111212git
+- 20111212 (master branch) snapshot
+
+* Fri Oct 21 2011 Rex Dieter <rdieter@fedoraproject.org> 0.4.55-0.1.20111021
+- 20111021 snapshot
+- pkgconfig-style deps
+
 * Mon Aug 15 2011 Rex Dieter <rdieter@fedoraproject.org> 0.4.1-2
 - rebuild
 
