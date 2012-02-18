@@ -1,10 +1,8 @@
 
-%define snap 20120107
-
 name: phonon-backend-vlc
 Summary: VLC phonon backend
 Version: 0.5.0
-Release: 0.2.%{snap}git%{?dist}.1
+Release: 1%{?dist}
 Group: Applications/Multimedia
 License: LGPLv2+
 URL:     http://phonon.kde.org/
@@ -13,7 +11,7 @@ URL:     http://phonon.kde.org/
 # git archive --prefix=phonon-backend-vlc-%{version}/ master | xz > phonon-backend-vlc-%{version}-%{snap}.tar.xz
 Source0: phonon-backend-vlc-%{version}-%{snap}.tar.xz
 %else
-Source0: ftp://ftp.kde.org/pub/kde/stable/phonon/phonon-backend-vlc/%{version}/phonon-backend-vlc-%{version}.tar.xz
+Source0: ftp://ftp.kde.org/pub/kde/stable/phonon/phonon-backend-vlc/%{version}/src/phonon-backend-vlc-%{version}.tar.xz
 %endif
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -76,6 +74,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sat Feb 18 2012 Rex Dieter <rdieter@fedoraproject.org> 0.5.0-1
+- 0.5.0
+
 * Sat Jan 07 2012 Rex Dieter <rdieter@fedoraproject.org> 0.5.0-0.2.20120107git
 - 20120107 (master branch) snapshot
 
