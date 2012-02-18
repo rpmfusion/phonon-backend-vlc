@@ -2,7 +2,7 @@
 name: phonon-backend-vlc
 Summary: VLC phonon backend
 Version: 0.5.0
-Release: 1%{?dist}
+Release: 1%{?dist}.1
 Group: Applications/Multimedia
 License: LGPLv2+
 URL:     http://phonon.kde.org/
