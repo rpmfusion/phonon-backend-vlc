@@ -2,7 +2,7 @@
 name: phonon-backend-vlc
 Summary: VLC phonon backend
 Version: 0.5.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Group: Applications/Multimedia
 License: LGPLv2+
 URL:     http://phonon.kde.org/
@@ -74,6 +74,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Mar 02 2012 Nicolas Chauvet <kwizart@gmail.com> - 0.5.0-2
+- Rebuilt for c++ ABI breakage
+
 * Sat Feb 18 2012 Rex Dieter <rdieter@fedoraproject.org> 0.5.0-1
 - 0.5.0
 
