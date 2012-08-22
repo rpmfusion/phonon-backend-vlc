@@ -1,8 +1,8 @@
 
 name: phonon-backend-vlc
 Summary: VLC phonon backend
-Version: 0.5.0
-Release: 1%{?dist}.1
+Version: 0.6.0
+Release: 1%{?dist}
 Group: Applications/Multimedia
 License: LGPLv2+
 URL:     http://phonon.kde.org/
@@ -11,7 +11,7 @@ URL:     http://phonon.kde.org/
 # git archive --prefix=phonon-backend-vlc-%{version}/ master | xz > phonon-backend-vlc-%{version}-%{snap}.tar.xz
 Source0: phonon-backend-vlc-%{version}-%{snap}.tar.xz
 %else
-Source0: ftp://ftp.kde.org/pub/kde/stable/phonon/phonon-backend-vlc/%{version}/src/phonon-backend-vlc-%{version}.tar.xz
+Source0: http://download.kde.org/stable/phonon/phonon-backend-vlc/%{version}/src/phonon-backend-vlc-%{version}.tar.xz
 %endif
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -74,6 +74,12 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sat Aug 11 2012 Rex Dieter <rdieter@fedoraproject.org> 0.6.0-1
+- 0.6.0
+
+* Fri Mar 02 2012 Nicolas Chauvet <kwizart@gmail.com> - 0.5.0-2
+- Rebuilt for c++ ABI breakage
+
 * Sat Feb 18 2012 Rex Dieter <rdieter@fedoraproject.org> 0.5.0-1
 - 0.5.0
 
