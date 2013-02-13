@@ -1,7 +1,7 @@
 
 name: phonon-backend-vlc
 Summary: VLC phonon backend
-Version: 0.6.1
+Version: 0.6.2
 Release: 1%{?dist}
 Group: Applications/Multimedia
 License: LGPLv2+
@@ -11,7 +11,7 @@ URL:     http://phonon.kde.org/
 # git archive --prefix=phonon-backend-vlc-%{version}/ master | xz > phonon-backend-vlc-%{version}-%{snap}.tar.xz
 Source0: phonon-backend-vlc-%{version}-%{snap}.tar.xz
 %else
-Source0: http://download.kde.org/stable/phonon/phonon-backend-vlc/%{version}/src/phonon-backend-vlc-%{version}.tar.xz
+Source0: http://download.kde.org/stable/phonon/phonon-backend-vlc/%{version}/phonon-backend-vlc-%{version}.tar.xz
 %endif
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -74,6 +74,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Feb 13 2013 Rex Dieter <rdieter@fedoraproject.org> 0.6.2-1
+- 0.6.2
+
 * Tue Nov 13 2012 Rex Dieter <rdieter@fedoraproject.org> 0.6.1-1
 - 0.6.1
 
