@@ -1,0 +1,12 @@
+diff -up phonon-backend-vlc-0.7.0/src/vlc.desktop.cmake.priority phonon-backend-vlc-0.7.0/src/vlc.desktop.cmake
+--- phonon-backend-vlc-0.7.0/src/vlc.desktop.cmake.priority	2013-11-04 10:49:24.000000000 -0600
++++ phonon-backend-vlc-0.7.0/src/vlc.desktop.cmake	2013-11-06 08:46:15.129946199 -0600
+@@ -7,7 +7,7 @@ X-KDE-PhononBackendInfo-InterfaceVersion
+ X-KDE-PhononBackendInfo-Version=@PHONON_VLC_VERSION@
+ X-KDE-PhononBackendInfo-Website=http://www.videolan.org/
+ Icon=vlc
+-InitialPreference=20
++InitialPreference=10
+ 
+ Name=VLC
+ Name[bg]=VLC
