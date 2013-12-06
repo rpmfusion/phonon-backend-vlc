@@ -1,7 +1,7 @@
 
 name: phonon-backend-vlc
 Summary: VLC phonon backend
-Version: 0.7.0
+Version: 0.7.1
 Release: 1%{?dist}
 
 License: LGPLv2+
@@ -11,7 +11,7 @@ URL:     http://phonon.kde.org/
 # git archive --prefix=phonon-backend-vlc-%{version}/ master | xz > phonon-backend-vlc-%{version}-%{snap}.tar.xz
 Source0: phonon-backend-vlc-%{version}-%{snap}.tar.xz
 %else
-Source0: http://download.kde.org/stable/phonon/phonon-backend-vlc/%{version}/src/phonon-backend-vlc-%{version}.tar.xz
+Source0: http://download.kde.org/stable/phonon/phonon-backend-vlc/%{version}/phonon-backend-vlc-%{version}.tar.xz
 %endif
 
 ## downstream patches
@@ -87,6 +87,9 @@ make install/fast DESTDIR=%{buildroot} -C %{_target_platform}
 
 
 %changelog
+* Fri Dec 06 2013 Rex Dieter <rdieter@fedoraproject.org> 0.7.1-1
+- 0.7.1
+
 * Wed Nov 06 2013 Rex Dieter <rdieter@fedoraproject.org> 0.7.0-1
 - 0.7.0, Qt5 support
 
