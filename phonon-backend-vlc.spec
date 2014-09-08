@@ -1,8 +1,8 @@
 
 name: phonon-backend-vlc
 Summary: VLC phonon backend
-Version: 0.7.1
-Release: 2%{?dist}
+Version: 0.8.0
+Release: 1%{?dist}
 
 License: LGPLv2+
 URL:     http://phonon.kde.org/
@@ -23,8 +23,8 @@ BuildRequires: cmake
 BuildRequires: kde-filesystem
 BuildRequires: pkgconfig(libvlc) >= 1.1.10
 BuildRequires: pkgconfig(libxml-2.0)
-BuildRequires: pkgconfig(phonon) >= 4.7
-BuildRequires: pkgconfig(phonon4qt5) >= 4.7
+BuildRequires: pkgconfig(phonon) >= 4.7.80
+BuildRequires: pkgconfig(phonon4qt5) >= 4.7.80
 BuildRequires: pkgconfig(QtGui)
 BuildRequires: pkgconfig(Qt5Gui) pkgconfig(Qt5Widgets)
 BuildRequires: pkgconfig(xcb) 
@@ -87,6 +87,9 @@ make install/fast DESTDIR=%{buildroot} -C %{_target_platform}
 
 
 %changelog
+* Mon Sep 08 2014 Rex Dieter <rdieter@fedoraproject.org> 0.8.0-1
+- 0.8.0
+
 * Sun Aug 31 2014 Sérgio Basto <sergio@serjux.com> - 0.7.1-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
 
