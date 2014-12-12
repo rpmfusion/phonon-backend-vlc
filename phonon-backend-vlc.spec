@@ -1,8 +1,8 @@
 
 name: phonon-backend-vlc
 Summary: VLC phonon backend
-Version: 0.8.1
-Release: 2%{?dist}
+Version: 0.8.2
+Release: 1%{?dist}
 
 License: LGPLv2+
 URL:     http://phonon.kde.org/
@@ -11,7 +11,7 @@ URL:     http://phonon.kde.org/
 # git archive --prefix=phonon-backend-vlc-%{version}/ master | xz > phonon-backend-vlc-%{version}-%{snap}.tar.xz
 Source0: phonon-backend-vlc-%{version}-%{snap}.tar.xz
 %else
-Source0: http://download.kde.org/stable/phonon/phonon-backend-vlc/%{version}/phonon-backend-vlc-%{version}.tar.xz
+Source0: http://download.kde.org/stable/phonon/phonon-backend-vlc/%{version}/src/phonon-backend-vlc-%{version}.tar.xz
 %endif
 
 ## downstream patches
@@ -87,6 +87,9 @@ make install/fast DESTDIR=%{buildroot} -C %{_target_platform}
 
 
 %changelog
+* Fri Dec 12 2014 Rex Dieter <rdieter@fedoraproject.org> 0.8.2-1
+- 0.8.2
+
 * Mon Nov 17 2014 Nicolas Chauvet <kwizart@gmail.com> - 0.8.1-2
 - Rebuild for vlc 2.2.0
 
