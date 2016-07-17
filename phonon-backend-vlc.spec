@@ -1,8 +1,8 @@
 
 name: phonon-backend-vlc
 Summary: VLC phonon backend
-Version: 0.8.2
-Release: 2%{?dist}
+Version: 0.9.0
+Release: 1%{?dist}
 
 License: LGPLv2+
 URL:     http://phonon.kde.org/
@@ -11,12 +11,15 @@ URL:     http://phonon.kde.org/
 # git archive --prefix=phonon-backend-vlc-%{version}/ master | xz > phonon-backend-vlc-%{version}-%{snap}.tar.xz
 Source0: phonon-backend-vlc-%{version}-%{snap}.tar.xz
 %else
-Source0: http://download.kde.org/stable/phonon/phonon-backend-vlc/%{version}/src/phonon-backend-vlc-%{version}.tar.xz
+Source0: http://download.kde.org/stable/phonon/phonon-backend-vlc/%{version}/phonon-backend-vlc-%{version}.tar.xz
 %endif
 
 ## downstream patches
 # reset initial preference below (fedora's default) gstreamer
-Patch1: phonon-backend-vlc-0.7.0-initial_preference.patch
+Patch1: phonon-backend-vlc-0.9.0-initial_preference.patch
+
+## upstream patch
+Patch2: give-libvlc-a-prefix-to-avoid-it-preprocessing-on-li.patch
 
 BuildRequires: automoc4 >= 0.9.86
 BuildRequires: cmake 
@@ -52,10 +55,10 @@ Provides: phonon-qt5-backend%{?_isa} = %{phonon_version}
 
 
 %prep
-%setup -q -n phonon-backend-vlc-%{version}%{?pre:-%{pre}}
+%setup -q -n phonon-vlc-%{version}%{?pre:-%{pre}}
 
 %patch1 -p1 -b .initial_preference
-
+%patch2 -p1 -b .give-libvlc-a-prefix
 
 %build
 mkdir -p %{_target_platform}
@@ -87,6 +90,10 @@ make install/fast DESTDIR=%{buildroot} -C %{_target_platform}
 
 
 %changelog
+* Sun Jul 17 2016 Leigh Scott <leigh123linux@googlemail.com> - 0.9.0-1
+- 0.9.0
+- patch to fix compile with vlc-3
+
 * Sat Nov 14 2015 Nicolas Chauvet <kwizart@gmail.com> - 0.8.2-2
 - https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
 
