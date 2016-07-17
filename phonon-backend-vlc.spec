@@ -22,7 +22,8 @@ Patch1: phonon-backend-vlc-0.9.0-initial_preference.patch
 Patch2: give-libvlc-a-prefix-to-avoid-it-preprocessing-on-li.patch
 
 BuildRequires: automoc4 >= 0.9.86
-BuildRequires: cmake 
+BuildRequires: cmake
+BuildRequires: extra-cmake-modules
 BuildRequires: kde-filesystem
 BuildRequires: pkgconfig(libvlc) >= 1.1.10
 BuildRequires: pkgconfig(libxml-2.0)
