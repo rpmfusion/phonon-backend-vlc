@@ -1,25 +1,15 @@
-
-name: phonon-backend-vlc
+Name:    phonon-backend-vlc
 Summary: VLC phonon backend
-Version: 0.9.0
-Release: 2%{?dist}
+Version: 0.9.1
+Release: 1%{?dist}
 
 License: LGPLv2+
 URL:     http://phonon.kde.org/
-%if 0%{?snap}
-# git clone git://anongit.kde.org/phonon-vlc; cd phonon-vlc
-# git archive --prefix=phonon-backend-vlc-%{version}/ master | xz > phonon-backend-vlc-%{version}-%{snap}.tar.xz
-Source0: phonon-backend-vlc-%{version}-%{snap}.tar.xz
-%else
 Source0: http://download.kde.org/stable/phonon/phonon-backend-vlc/%{version}/phonon-backend-vlc-%{version}.tar.xz
-%endif
 
 ## downstream patches
 # reset initial preference below (fedora's default) gstreamer
 Patch1: phonon-backend-vlc-0.9.0-initial_preference.patch
-
-## upstream patch
-Patch2: give-libvlc-a-prefix-to-avoid-it-preprocessing-on-li.patch
 
 BuildRequires: automoc4 >= 0.9.86
 BuildRequires: cmake
@@ -44,53 +34,59 @@ Requires: vlc-core%{?_isa} >= %{vlc_ver}
 Requires: phonon%{?_isa} >= %{phonon_ver}
 %{?_qt4_version:Requires: qt4%{?_isa} >= %{_qt4_version}}
 
-%package -n phonon-qt5-backend-vlc
-Summary:  Vlc phonon-qt5 backend
-Provides: phonon-qt5-backend%{?_isa} = %{phonon_version}
-%{?_qt5_version:Requires: qt5-qtbase%{?_isa} >= %{_qt5_version}}
-%description -n phonon-qt5-backend-vlc
-%{summary}.
 
 %description
 %{summary}.
 
 
-%prep
-%setup -q -n phonon-vlc-%{version}%{?pre:-%{pre}}
+%package -n phonon-qt5-backend-vlc
+Summary:  Vlc phonon-qt5 backend
+Provides: phonon-qt5-backend%{?_isa} = %{phonon_ver}
+%{?_qt5_version:Requires: qt5-qtbase%{?_isa} >= %{_qt5_version}}
 
-%patch1 -p1 -b .initial_preference
-%patch2 -p1 -b .give-libvlc-a-prefix
+
+%description -n phonon-qt5-backend-vlc
+%{summary}.
+
+
+%prep
+%autosetup -p1
 
 %build
 mkdir -p %{_target_platform}
 pushd %{_target_platform}
 %{cmake} ..
-make %{?_smp_mflags}
+%make_build
 popd
 
-mkdir -p %{_target_platform}-Qt5
-pushd %{_target_platform}-Qt5
+mkdir -p %{_target_platform}-qt5
+pushd %{_target_platform}-qt5
 %{cmake} -DPHONON_BUILD_PHONON4QT5:BOOL=ON ..
-make %{?_smp_mflags}
+%make_build
 popd
 
 
 %install
-make install/fast DESTDIR=%{buildroot} -C %{_target_platform}-Qt5
+make install/fast DESTDIR=%{buildroot} -C %{_target_platform}-qt5
 make install/fast DESTDIR=%{buildroot} -C %{_target_platform}
 
 
 %files
-%doc AUTHORS COPYING.LIB
+%doc AUTHORS
+%license COPYING.LIB
 %{_kde4_libdir}/kde4/plugins/phonon_backend/phonon_vlc.so
 %{_kde4_datadir}/kde4/services/phononbackends/vlc.desktop
 
 %files -n phonon-qt5-backend-vlc
-%doc AUTHORS COPYING.LIB
+%doc AUTHORS
+%license COPYING.LIB
 %{_qt5_plugindir}/phonon4qt5_backend/phonon_vlc.so
 
 
 %changelog
+* Wed Jul 12 2017 Leigh Scott <leigh123linux@googlemail.com> - 0.9.1-1
+- 0.9.1
+
 * Mon Mar 20 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 0.9.0-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
 
