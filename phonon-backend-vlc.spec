@@ -1,7 +1,7 @@
 Name:    phonon-backend-vlc
 Summary: VLC phonon backend
 Version: 0.9.1
-Release: 3%{?dist}
+Release: 4%{?dist}
 
 License: LGPLv2+
 URL:     http://phonon.kde.org/
@@ -14,6 +14,7 @@ Patch1: phonon-backend-vlc-0.9.0-initial_preference.patch
 BuildRequires: automoc4 >= 0.9.86
 BuildRequires: cmake
 BuildRequires: extra-cmake-modules
+BuildRequires: gcc-c++
 BuildRequires: kde-filesystem
 BuildRequires: pkgconfig(libvlc) >= 1.1.10
 BuildRequires: pkgconfig(libxml-2.0)
@@ -32,19 +33,13 @@ Provides: phonon-backend%{?_isa} = %{phonon_ver}
 
 Requires: vlc-core%{?_isa} >= %{vlc_ver} 
 Requires: phonon%{?_isa} >= %{phonon_ver}
-%{?_qt4_version:Requires: qt4%{?_isa} >= %{_qt4_version}}
-
 
 %description
 %{summary}.
 
-
 %package -n phonon-qt5-backend-vlc
 Summary:  Vlc phonon-qt5 backend
 Provides: phonon-qt5-backend%{?_isa} = %{phonon_ver}
-%{?_qt5_version:Requires: qt5-qtbase%{?_isa} >= %{_qt5_version}}
-
-
 %description -n phonon-qt5-backend-vlc
 %{summary}.
 
@@ -52,14 +47,15 @@ Provides: phonon-qt5-backend%{?_isa} = %{phonon_ver}
 %prep
 %autosetup -p1
 
+
 %build
-mkdir -p %{_target_platform}
+mkdir %{_target_platform}
 pushd %{_target_platform}
 %{cmake} ..
 %make_build
 popd
 
-mkdir -p %{_target_platform}-qt5
+mkdir %{_target_platform}-qt5
 pushd %{_target_platform}-qt5
 %{cmake} -DPHONON_BUILD_PHONON4QT5:BOOL=ON ..
 %make_build
@@ -84,6 +80,9 @@ make install/fast DESTDIR=%{buildroot} -C %{_target_platform}
 
 
 %changelog
+* Wed Feb 28 2018 Rex Dieter <rdieter@fedoraproject.org> - 0.9.1-4
+- .spec polish
+
 * Thu Dec 07 2017 Nicolas Chauvet <kwizart@gmail.com> - 0.9.1-3
 - Rebuilt for libvlc
 
