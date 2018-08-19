@@ -1,7 +1,7 @@
 Name:    phonon-backend-vlc
 Summary: VLC phonon backend
 Version: 0.9.1
-Release: 5%{?dist}
+Release: 6%{?dist}
 
 License: LGPLv2+
 URL:     http://phonon.kde.org/
@@ -80,6 +80,9 @@ make install/fast DESTDIR=%{buildroot} -C %{_target_platform}
 
 
 %changelog
+* Sun Aug 19 2018 Leigh Scott <leigh123linux@googlemail.com> - 0.9.1-6
+- Rebuilt for Fedora 29 Mass Rebuild binutils issue
+
 * Fri Jul 27 2018 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 0.9.1-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
 
