@@ -18,8 +18,8 @@ BuildRequires: gcc-c++
 BuildRequires: kde-filesystem
 BuildRequires: pkgconfig(libvlc) >= 1.1.10
 BuildRequires: pkgconfig(libxml-2.0)
-BuildRequires: pkgconfig(phonon) >= 4.7.80
-BuildRequires: pkgconfig(phonon4qt5) >= 4.7.80
+BuildRequires: pkgconfig(phonon)
+BuildRequires: pkgconfig(phonon4qt5)
 BuildRequires: pkgconfig(QtGui)
 BuildRequires: pkgconfig(Qt5Gui) pkgconfig(Qt5Widgets)
 BuildRequires: pkgconfig(xcb) 
