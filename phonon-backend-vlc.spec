@@ -1,15 +1,13 @@
 Name:    phonon-backend-vlc
 Summary: VLC phonon backend
-Version: 0.9.1
-Release: 6%{?dist}
+Version: 0.10.2
+Release: 1%{?dist}
 
 License: LGPLv2+
 URL:     http://phonon.kde.org/
 Source0: http://download.kde.org/stable/phonon/phonon-backend-vlc/%{version}/phonon-backend-vlc-%{version}.tar.xz
 
 ## downstream patches
-# reset initial preference below (fedora's default) gstreamer
-Patch1: phonon-backend-vlc-0.9.0-initial_preference.patch
 
 BuildRequires: automoc4 >= 0.9.86
 BuildRequires: cmake
@@ -47,6 +45,9 @@ Provides: phonon-qt5-backend%{?_isa} = %{phonon_ver}
 %prep
 %autosetup -p1
 
+# reset initial preference below (fedora's default) gstreamer
+sed -i -e 's|^InitialPreference=.*|InitialPreference=10|g' src/vlc.desktop.cmake
+
 
 %build
 mkdir %{_target_platform}
@@ -80,6 +81,9 @@ make install/fast DESTDIR=%{buildroot} -C %{_target_platform}
 
 
 %changelog
+* Wed Jan 16 2019 Rex Dieter <rdieter@fedoraproject.org> - 0.10.2-1
+- 0.10.2
+
 * Sun Aug 19 2018 Leigh Scott <leigh123linux@googlemail.com> - 0.9.1-6
 - Rebuilt for Fedora 29 Mass Rebuild binutils issue
 
