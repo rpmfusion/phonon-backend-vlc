@@ -2,7 +2,7 @@
 name: phonon-backend-vlc
 Summary: VLC phonon backend
 Version: 0.6.2
-Release: 2%{?dist}
+Release: 3%{?dist}
 Group: Applications/Multimedia
 License: LGPLv2+
 URL:     http://phonon.kde.org/
@@ -67,6 +67,9 @@ make install/fast DESTDIR=%{buildroot} -C %{_target_platform}
 
 
 %changelog
+* Fri Jan 18 2019 Orion Poplawski <orion@nwra.com> - 0.6.2-3
+- Rebuild for vlc 3.0
+
 * Wed Mar 08 2017 Orion Poplawski <orion@cora.nwra.com> - 0.6.2-2
 - Require vlc instead of vlc-core for GUI applications to work
 - Use %%license
