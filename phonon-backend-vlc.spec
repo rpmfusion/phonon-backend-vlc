@@ -1,7 +1,7 @@
 Name:    phonon-backend-vlc
 Summary: VLC phonon backend
-Version: 0.10.2
-Release: 2%{?dist}
+Version: 0.10.3
+Release: 1%{?dist}
 
 License: LGPLv2+
 URL:     http://phonon.kde.org/
@@ -43,7 +43,7 @@ Provides: phonon-qt5-backend%{?_isa} = %{phonon_ver}
 
 
 %prep
-%autosetup -p1
+%autosetup -n phonon-vlc-%{version} -p1
 
 # reset initial preference below (fedora's default) gstreamer
 sed -i -e 's|^InitialPreference=.*|InitialPreference=10|g' src/vlc.desktop.cmake
@@ -67,6 +67,8 @@ popd
 make install/fast DESTDIR=%{buildroot} -C %{_target_platform}-qt5
 make install/fast DESTDIR=%{buildroot} -C %{_target_platform}
 
+%find_lang phonon_vlc --with-qt
+
 
 %files
 %doc AUTHORS
@@ -74,13 +76,16 @@ make install/fast DESTDIR=%{buildroot} -C %{_target_platform}
 %{_kde4_libdir}/kde4/plugins/phonon_backend/phonon_vlc.so
 %{_kde4_datadir}/kde4/services/phononbackends/vlc.desktop
 
-%files -n phonon-qt5-backend-vlc
+%files -n phonon-qt5-backend-vlc -f phonon_vlc.lang
 %doc AUTHORS
 %license COPYING.LIB
 %{_qt5_plugindir}/phonon4qt5_backend/phonon_vlc.so
 
 
 %changelog
+* Wed Jul 31 2019 Rex Dieter <rdieter@fedoraproject.org> - 0.10.3-1
+- 0.10.3
+
 * Mon Mar 04 2019 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 0.10.2-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
 
