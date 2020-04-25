@@ -1,7 +1,7 @@
 Name:    phonon-backend-vlc
 Summary: VLC phonon backend
-Version: 0.10.3
-Release: 3%{?dist}
+Version: 0.11.1
+Release: 1%{?dist}
 
 License: LGPLv2+
 URL:     http://phonon.kde.org/
@@ -9,28 +9,19 @@ Source0: http://download.kde.org/stable/phonon/phonon-backend-vlc/%{version}/pho
 
 ## downstream patches
 
-BuildRequires: automoc4 >= 0.9.86
 BuildRequires: cmake
 BuildRequires: extra-cmake-modules
 BuildRequires: gcc-c++
-BuildRequires: kde-filesystem
 BuildRequires: pkgconfig(libvlc) >= 1.1.10
 BuildRequires: pkgconfig(libxml-2.0)
-BuildRequires: pkgconfig(phonon)
-BuildRequires: pkgconfig(phonon4qt5)
-BuildRequires: pkgconfig(QtGui)
+BuildRequires: pkgconfig(phonon4qt5) >= 4.11
 BuildRequires: pkgconfig(Qt5Gui) pkgconfig(Qt5Widgets)
 BuildRequires: pkgconfig(xcb) 
 # Oh, the irony of being in the default buildroot @ rpmfusion
-BuildRequires: phonon-backend-gstreamer
+BuildRequires: phonon-qt5-backend-gstreamer
 
-%global phonon_ver %(pkg-config --modversion phonon 2>/dev/null || echo 4.7.0)
+%global phonon_ver %(pkg-config --modversion phonon4qt5 2>/dev/null || echo 4.11)
 %global vlc_ver %(pkg-config --modversion libvlc 2>/dev/null || echo 1.1.10)
-
-Provides: phonon-backend%{?_isa} = %{phonon_ver}
-
-Requires: vlc-core%{?_isa} >= %{vlc_ver} 
-Requires: phonon%{?_isa} >= %{phonon_ver}
 
 %description
 %{summary}.
@@ -38,43 +29,32 @@ Requires: phonon%{?_isa} >= %{phonon_ver}
 %package -n phonon-qt5-backend-vlc
 Summary:  Vlc phonon-qt5 backend
 Provides: phonon-qt5-backend%{?_isa} = %{phonon_ver}
+Requires: vlc-core%{?_isa} >= %{vlc_ver}
+Requires: phonon-qt5%{?_isa} >= %{phonon_ver}
 %description -n phonon-qt5-backend-vlc
 %{summary}.
 
 
 %prep
-%autosetup -n phonon-vlc-%{version} -p1
+%autosetup -n phonon-backend-vlc-%{version} -p1
 
 # reset initial preference below (fedora's default) gstreamer
-sed -i -e 's|^InitialPreference=.*|InitialPreference=10|g' src/vlc.desktop.cmake
+sed -i -e 's|^InitialPreference=.*|InitialPreference=10|g' src/phonon-vlc.json.in
 
 
 %build
-mkdir %{_target_platform}
-pushd %{_target_platform}
-%{cmake} ..
-%make_build
-popd
-
 mkdir %{_target_platform}-qt5
 pushd %{_target_platform}-qt5
-%{cmake} -DPHONON_BUILD_PHONON4QT5:BOOL=ON ..
+%{cmake} ..
 %make_build
 popd
 
 
 %install
 make install/fast DESTDIR=%{buildroot} -C %{_target_platform}-qt5
-make install/fast DESTDIR=%{buildroot} -C %{_target_platform}
 
 %find_lang phonon_vlc --with-qt
 
-
-%files
-%doc AUTHORS
-%license COPYING.LIB
-%{_kde4_libdir}/kde4/plugins/phonon_backend/phonon_vlc.so
-%{_kde4_datadir}/kde4/services/phononbackends/vlc.desktop
 
 %files -n phonon-qt5-backend-vlc -f phonon_vlc.lang
 %doc AUTHORS
@@ -83,6 +63,9 @@ make install/fast DESTDIR=%{buildroot} -C %{_target_platform}
 
 
 %changelog
+* Sat Apr 25 2020 Rex Dieter <rdieter@fedoraproject.org> - 0.11.1-1
+- 0.11.1, qt5 only
+
 * Wed Feb 05 2020 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 0.10.3-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
