@@ -1,3 +1,5 @@
+%undefine __cmake_in_source_build
+
 Name:    phonon-backend-vlc
 Summary: VLC phonon backend
 Version: 0.11.1
@@ -9,7 +11,7 @@ Source0: http://download.kde.org/stable/phonon/phonon-backend-vlc/%{version}/pho
 
 ## downstream patches
 
-BuildRequires: cmake
+BuildRequires: cmake3
 BuildRequires: extra-cmake-modules
 BuildRequires: gcc-c++
 BuildRequires: pkgconfig(libvlc) >= 1.1.10
@@ -41,15 +43,12 @@ sed -i -e 's|^InitialPreference=.*|InitialPreference=10|g' src/phonon-vlc.json.i
 
 
 %build
-mkdir %{_target_platform}-qt5
-pushd %{_target_platform}-qt5
-%{cmake} ..
-%make_build
-popd
+%{cmake3}
+%{cmake3_build}
 
 
 %install
-make install/fast DESTDIR=%{buildroot} -C %{_target_platform}-qt5
+%{cmake3_install}
 
 %find_lang phonon_vlc --with-qt
 
