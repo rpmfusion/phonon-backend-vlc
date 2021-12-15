@@ -2,8 +2,8 @@
 
 Name:    phonon-backend-vlc
 Summary: VLC phonon backend
-Version: 0.11.1
-Release: 4%{?dist}
+Version: 0.11.3
+Release: 1%{?dist}
 
 License: LGPLv2+
 URL:     http://phonon.kde.org/
@@ -60,6 +60,9 @@ sed -i -e 's|^InitialPreference=.*|InitialPreference=10|g' src/phonon-vlc.json.i
 
 
 %changelog
+* Wed Dec 15 2021 Nicolas Chauvet <kwizart@gmail.com> - 0.11.3-1
+- Update to 0.11.3
+
 * Tue Aug 03 2021 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 0.11.1-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
 
